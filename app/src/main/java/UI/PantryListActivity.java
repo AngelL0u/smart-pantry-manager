@@ -1,9 +1,9 @@
 package com.example.smartpantry.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,9 @@ import com.example.smartpantry.model.PantryItem;
 
 import java.util.List;
 
+/**
+ * Shows every pantry item and lets the user add, edit or delete one.
+ */
 public class PantryListActivity extends AppCompatActivity implements PantryAdapter.OnItemActionListener {
 
     private DatabaseHelper databaseHelper;
@@ -35,12 +38,15 @@ public class PantryListActivity extends AppCompatActivity implements PantryAdapt
         adapter = new PantryAdapter(this);
         recyclerView.setAdapter(adapter);
 
-        findViewById(R.id.fabAddItem).setOnClickListener(v -> onAddItem());
+        findViewById(R.id.fabAddItem).setOnClickListener(v ->
+                startActivity(new Intent(this, AddEditItemActivity.class)));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        // Reload every time this screen becomes visible, so changes made on
+        // the Add/Edit screen (or a delete just performed) are always reflected.
         refreshList();
     }
 
@@ -50,14 +56,11 @@ public class PantryListActivity extends AppCompatActivity implements PantryAdapt
         emptyStateText.setVisibility(items.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
-    private void onAddItem() {
-        Toast.makeText(this, "Add screen coming in Phase 4", Toast.LENGTH_SHORT).show();
-    }
-
     @Override
     public void onEdit(PantryItem item) {
-        Toast.makeText(this, "Edit screen coming in Phase 4: " + item.getName(),
-                Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, AddEditItemActivity.class);
+        intent.putExtra(AddEditItemActivity.EXTRA_ITEM_ID, item.getId());
+        startActivity(intent);
     }
 
     @Override
