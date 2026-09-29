@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.smartpantry.R;
 import com.example.smartpantry.data.DatabaseHelper;
 import com.example.smartpantry.model.PantryItem;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
 
@@ -41,9 +42,8 @@ public class PantryListActivity extends AppCompatActivity implements PantryAdapt
         findViewById(R.id.fabAddItem).setOnClickListener(v ->
                 startActivity(new Intent(this, AddEditItemActivity.class)));
 
-        // Temporary link until proper bottom navigation is added in the next phase.
-        findViewById(R.id.textGoToRecipes).setOnClickListener(v ->
-                startActivity(new Intent(this, SuggestedRecipesActivity.class)));
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNavigation);
+        NavigationHelper.setup(this, bottomNav, R.id.nav_pantry);
     }
 
     @Override

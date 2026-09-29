@@ -14,6 +14,7 @@ import com.example.smartpantry.data.DatabaseHelper;
 import com.example.smartpantry.logic.RecipeMatcher;
 import com.example.smartpantry.model.PantryItem;
 import com.example.smartpantry.model.Recipe;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
 
@@ -39,6 +40,9 @@ public class SuggestedRecipesActivity extends AppCompatActivity implements Recip
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new RecipeAdapter(this);
         recyclerView.setAdapter(adapter);
+
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNavigation);
+        NavigationHelper.setup(this, bottomNav, R.id.nav_recipes);
     }
 
     @Override
