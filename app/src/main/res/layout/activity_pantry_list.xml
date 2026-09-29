@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/pantryListRoot"
+    android:background="#F2F2F5"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,8 +12,9 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="My Pantry"
-        android:textSize="22sp"
+        android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="#212121"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -50,6 +52,8 @@
         android:layout_marginEnd="24dp"
         android:contentDescription="Add pantry item"
         android:src="@android:drawable/ic_input_add"
+        app:backgroundTint="#4CAF50"
+        app:tint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintEnd_toEndOf="parent" />
 

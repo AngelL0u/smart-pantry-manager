@@ -3,7 +3,7 @@ package com.example.smartpantry.ui;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,8 +15,14 @@ import com.example.smartpantry.model.PantryItem;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Binds a list of PantryItem to the RecyclerView on PantryListActivity.
+ * Edit/delete taps are reported back to the Activity via the listener,
+ * because the adapter should not know about navigation or the database.
+ */
 public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.ViewHolder> {
 
+    /** Callback for row actions. Implemented by the hosting Activity. */
     public interface OnItemActionListener {
         void onEdit(PantryItem item);
         void onDelete(PantryItem item);
@@ -29,6 +35,7 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.ViewHolder
         this.listener = listener;
     }
 
+    /** Replaces all data and refreshes the list. Call after every DB change. */
     public void setItems(List<PantryItem> newItems) {
         items.clear();
         items.addAll(newItems);
@@ -70,6 +77,7 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.ViewHolder
         return items.size();
     }
 
+    /** Avoids showing "3.0" for whole numbers, e.g. shows "3" instead of "3.0". */
     private String formatQuantity(double quantity) {
         if (quantity == Math.floor(quantity) && !Double.isInfinite(quantity)) {
             return String.valueOf((long) quantity);
@@ -81,8 +89,8 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.ViewHolder
         final TextView name;
         final TextView quantity;
         final TextView expiry;
-        final Button editButton;
-        final Button deleteButton;
+        final ImageButton editButton;
+        final ImageButton deleteButton;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -14,7 +14,7 @@ import com.example.smartpantry.model.Recipe;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Binds a list of Recipe (name + ingredient count) and reports taps to the host Activity. */
+/** Binds a list of Recipe and reports taps to the host Activity. */
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
 
     public interface OnRecipeClickListener {
@@ -46,8 +46,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Recipe recipe = recipes.get(position);
         holder.name.setText(recipe.getName());
-        int count = recipe.getIngredients().size();
-        holder.ingredientCount.setText(count + (count == 1 ? " ingredient needed" : " ingredients needed"));
+        holder.subtitle.setText("\u2713 You have everything for this");
         holder.itemView.setOnClickListener(v -> listener.onRecipeClick(recipe));
     }
 
@@ -58,12 +57,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         final TextView name;
-        final TextView ingredientCount;
+        final TextView subtitle;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.textRecipeName);
-            ingredientCount = itemView.findViewById(R.id.textIngredientCount);
+            subtitle = itemView.findViewById(R.id.textIngredientCount);
         }
     }
 }
