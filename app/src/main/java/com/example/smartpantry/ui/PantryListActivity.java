@@ -40,6 +40,10 @@ public class PantryListActivity extends AppCompatActivity implements PantryAdapt
 
         findViewById(R.id.fabAddItem).setOnClickListener(v ->
                 startActivity(new Intent(this, AddEditItemActivity.class)));
+
+        // Temporary link until proper bottom navigation is added in the next phase.
+        findViewById(R.id.textGoToRecipes).setOnClickListener(v ->
+                startActivity(new Intent(this, SuggestedRecipesActivity.class)));
     }
 
     @Override
